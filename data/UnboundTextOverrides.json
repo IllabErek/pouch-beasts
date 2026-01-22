@@ -1,0 +1,19 @@
+{
+  "abilities": {
+    "cotton-cloud": {
+      "name": "Cotton Cloud",
+      "description": "Lowers the Speed of all other Pokemon on the field by 1 stage when the user is hit by an attack."
+    },
+    "neuroforce": {
+      "name": "Neuroforce",
+      "description": "Boosts the power of the user's supereffective moves by 25%."
+    }
+  },
+  "items": {
+    "ability-shield": {
+      "name": "Ability Shield",
+      "description": "Protects the holder from having its Ability changed or suppressed by any effect."
+    }
+  },
+  "moves": {}
+}

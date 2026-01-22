@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Saved Teams</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="wrap topbarInner">
+      <div>
+        <div class="title">Saved Teams</div>
+        <div class="subtitle">Open a team in the planner, rename it, or delete it.</div>
+      </div>
+      <nav class="nav">
+        <a class="navLink" href="index.html">Drafter</a>
+        <a class="navLink" href="teams.html" aria-current="page">Teams</a>
+        <a class="navLink" href="planner.html">Planner</a>
+        <a class="navLink" href="coverage.html">Coverage</a>
+        <a class="navLink" href="compendium.html">Compendium</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="card">
+      <div class="cardHeader">
+        <div class="sectionTitle">Teams</div>
+        <div class="muted small" id="teamsCount"></div>
+      </div>
+      <div class="cardBody">
+        <div id="teamsList" class="teamsList"></div>
+        <div class="row gap topPad">
+          <a class="btn" href="index.html">Draft a new team</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+  <script>window.PTD.initTeamsPage();</script>
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Pokemon Team Drafter</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="wrap topbarInner">
+      <div>
+        <div class="title">Pokemon Team Drafter</div>
+        <div class="subtitle">Pick 1 of 3, six times. Toggle which generations can roll.</div>
+      </div>
+      <nav class="nav">
+        <a class="navLink" href="index.html" aria-current="page">Drafter</a>
+        <a class="navLink" href="teams.html">Teams</a>
+        <a class="navLink" href="planner.html">Planner</a>
+        <a class="navLink" href="coverage.html">Coverage</a>
+        <a class="navLink" href="compendium.html">Compendium</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="card">
+      <div class="cardHeader">
+        <div class="sectionTitle">Generation toggles</div>
+        <div class="muted small">Turn gens on or off, then roll.</div>
+      </div>
+      <div class="cardBody">
+        <div class="row gap wrapRow">
+          <div id="genToggles" class="genGrid"></div>
+          <div class="row gap wrapRow">
+            <button id="allGensBtn" class="btn">All</button>
+            <button id="noneGensBtn" class="btn">None</button>
+          </div>
+        </div>
+
+        <div class="row gap topPad wrapRow">
+          <button id="rollBtn" class="btn primary">Roll 3</button>
+          <button id="restartBtn" class="btn">Restart run</button>
+          <button id="saveBtn" class="btn" disabled>Save team</button>
+        </div>
+
+        <div id="status" class="status"></div>
+      </div>
+    </section>
+
+    <section class="grid2">
+      
+      <section class="card">
+        <div class="cardHeader">
+          <div class="sectionTitle">Current roll</div>
+          <div class="muted small">Click one to draft it.</div>
+        </div>
+        <div class="cardBody">
+          <div id="choices" class="choices"></div>
+        </div>
+      </section>
+
+      <section class="card">
+        <div class="cardHeader">
+          <div class="sectionTitle">Your team</div>
+          <div class="muted small"><span id="pickCount">0</span> of 6 picks</div>
+        </div>
+        <div class="cardBody">
+          <div class="row gap wrapRow" style="margin-bottom:10px">
+            <label class="field" style="min-width:260px;flex:1 1 auto">
+              <span class="label">Add Pokemon (search)</span>
+              <input id="manualAddInput" class="input" list="pokemonDatalist" placeholder="Type a Pokemon name">
+            </label>
+            <div class="row gap" style="align-items:flex-end">
+              <button id="manualAddBtn" class="btn">Add to team</button>
+              <button id="manualClearBtn" class="btn">Clear</button>
+            </div>
+          </div>
+          <datalist id="pokemonDatalist"></datalist>
+          <div id="teamSlots" class="teamSlots"></div>
+        </div>
+      </section>
+
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+  <script>window.PTD.initDrafter();</script>
+</body>
+</html>

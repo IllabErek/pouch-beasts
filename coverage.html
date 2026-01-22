@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Type Coverage</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="wrap topbarInner">
+      <div>
+        <div class="title">Type Coverage</div>
+        <div class="subtitle">Per Pokemon and team type matchups, plus the standard type chart.</div>
+      </div>
+      <nav class="nav">
+        <a class="navLink" href="index.html">Drafter</a>
+        <a class="navLink" href="teams.html">Teams</a>
+        <a class="navLink" href="planner.html">Planner</a>
+        <a class="navLink" href="coverage.html" aria-current="page">Coverage</a>
+        <a class="navLink" href="compendium.html">Compendium</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="card">
+      <div class="cardHeader">
+        <div class="sectionTitle">Select team</div>
+        <div class="muted small" id="coverageStatus"></div>
+      </div>
+      <div class="cardBody">
+        <div class="row gap wrapRow">
+          <label class="field">
+            <span class="label">Team</span>
+            <select id="coverageTeamSelect" class="input"></select>
+          </label>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="cardHeader">
+        <div class="sectionTitle">Team summary</div>
+        <div class="muted small">Defense shows counts of weaknesses and resistances across the team.</div>
+      </div>
+      <div class="cardBody">
+        <div>
+          <div class="muted small" style="margin-bottom:8px">Defense (weak and resist counts)</div>
+          <div class="typeGrid roomy" id="teamDefGrid"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="cardHeader">
+        <div class="sectionTitle">Per Pokemon</div>
+        <div class="muted small">Uses Unbound types when available.</div>
+      </div>
+      <div class="cardBody" id="coverageMonList"></div>
+    </section>
+
+    <section class="card">
+      <div class="cardHeader">
+        <div class="sectionTitle">Pokemon type chart</div>
+        <div class="muted small">Attack type (rows) vs defense type (columns).</div>
+      </div>
+      <div class="cardBody">
+        <div class="typeChartWrap" id="typeChart"></div>
+      </div>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+  <script>window.PTD.initCoveragePage();</script>
+</body>
+</html>

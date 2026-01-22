@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Compendium</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="wrap topbarInner">
+      <div class="title">Pokemon Team Drafter</div>
+      <nav class="nav">
+        <a class="navLink" href="index.html">Drafter</a>
+        <a class="navLink" href="teams.html">Teams</a>
+        <a class="navLink" href="planner.html">Planner</a>
+        <a class="navLink" href="coverage.html">Coverage</a>
+        <a class="navLink" href="compendium.html" aria-current="page">Compendium</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="card">
+      <div class="cardHeader">
+        <div class="sectionTitle">Compendium</div>
+        <div class="muted small" id="compendiumStatus"></div>
+      </div>
+      <div class="cardBody">
+        <div class="row gap wrapRow">
+          <div class="segmented" id="compendiumTabs">
+            <button class="segBtn on" data-tab="moves">Moves</button>
+            <button class="segBtn" data-tab="abilities">Abilities</button>
+            <button class="segBtn" data-tab="items">Items</button>
+          </div>
+
+          <label class="field grow">
+            <span class="label">Search</span>
+            <input id="compendiumSearch" class="input" type="text" placeholder="Type to filter">
+          </label>
+        </div>
+
+        <div class="row gap topPad compGrid">
+          <div class="compList" id="compendiumList"></div>
+          <div class="compDetail" id="compendiumDetail">
+            <div class="muted small">Select an entry to see details.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+  <script>window.PTD.initCompendiumPage();</script>
+</body>
+</html>

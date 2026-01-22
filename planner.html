@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Team Planner</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="wrap topbarInner">
+      <div>
+        <div class="title">Team Planner</div>
+        <div class="subtitle">Unbound data for stats, types, abilities, moves, items, natures. Plans are saved locally.</div>
+      </div>
+      <nav class="nav">
+        <a class="navLink" href="index.html">Drafter</a>
+        <a class="navLink" href="teams.html">Teams</a>
+        <a class="navLink" href="planner.html" aria-current="page">Planner</a>
+        <a class="navLink" href="coverage.html">Coverage</a>
+        <a class="navLink" href="compendium.html">Compendium</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="card">
+      <div class="cardHeader">
+        <div class="sectionTitle">Select team</div>
+        <div class="muted small" id="plannerStatus"></div>
+      </div>
+      <div class="cardBody">
+        <div class="row gap wrapRow">
+          <label class="field">
+            <span class="label">Team</span>
+            <select id="teamSelect" class="input"></select>
+          </label>
+
+          <label class="field grow">
+            <span class="label">Team name</span>
+            <input id="teamName" class="input" type="text" placeholder="Team name">
+          </label>
+
+          <div class="field">
+            <span class="label">&nbsp;</span>
+            <button id="saveTeamNameBtn" class="btn">Save name</button>
+          </div>
+        </div>
+
+        <div class="row gap topPad wrapRow">
+          <div class="pill" id="dataPill">Loading Unbound data...</div>
+          <button id="exportExcelBtn" class="btn">Export to Excel</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="plannerGrid" class="plannerGrid"></section>
+  </main>
+
+  <datalist id="itemsDatalist"></datalist>
+
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+  <script src="app.js"></script>
+  <script>window.PTD.initPlannerPage();</script>
+</body>
+</html>

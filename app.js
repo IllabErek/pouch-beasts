@@ -134,8 +134,12 @@
 
   function getRun(){
     const run = loadJson(STORE_KEYS.run, null);
-    if(run && Array.isArray(run.team) && Array.isArray(run.choices)) return run;
-    return { team: [], choices: [], enabledGens: getEnabledGens() };
+    if(run && Array.isArray(run.team) && Array.isArray(run.choices)){
+      if(!Array.isArray(run.seen)) run.seen = [];
+      if(!Array.isArray(run.enabledGens)) run.enabledGens = getEnabledGens();
+      return run;
+    }
+    return { team: [], choices: [], seen: [], enabledGens: getEnabledGens() };
   }
 
   function setRun(run){ saveJson(STORE_KEYS.run, run); }
@@ -295,7 +299,7 @@
     return constKey;
   }
 
-  async function roll3(enabledGens, alreadyPicked, data){
+  async function roll3(enabledGens, alreadyPicked, data, seenList){
     const gens = Array.isArray(enabledGens) && enabledGens.length ? enabledGens : DEFAULT_ENABLED_GENS;
 
     const isExcluded = (sc) => {
@@ -329,9 +333,7 @@
   }
 
   // Regional-only rolling: exclude non-regional form variants (keep them searchable via manual search).
-  const hasRegional =
-  /_(ALOLA|ALOLAN|GALAR|GALARIAN|HISUI|HISUIAN)\b/i.test(s) ||
-  /_(A|G|H)$/i.test(s);
+  const hasRegional = /_(ALOLA|ALOLAN|GALAR|GALARIAN|HISUI|HISUIAN)\b/i.test(s) || /_(A|G|H)$/i.test(s);
   if(!hasRegional && s.includes('_') && data){
     const hasKey = (k) => !!((data.baseStats && data.baseStats[k]) || (data.speciesConstToName && data.speciesConstToName[k]));
     let base = s;
@@ -356,12 +358,15 @@
     const pickedSet = new Set((alreadyPicked || []).map(m => String(m.speciesConst || "").trim()).filter(Boolean));
     const uniqAll = Array.from(new Set(all)).filter(sc => !pickedSet.has(sc));
 
-    if(uniqAll.length < 3) throw new Error("Not enough remaining species to roll from the selected gens.");
+    const seenSet = new Set((seenList || []).map(x => String(x || "").trim()).filter(Boolean));
+    const remaining = uniqAll.filter(sc => !seenSet.has(sc));
+
+    if(remaining.length < 3) throw new Error("Not enough remaining species to roll from the selected gens.");
 
     const picks = [];
     while(picks.length < 3){
-      const idx = Math.floor(Math.random() * uniqAll.length);
-      const sc = uniqAll[idx];
+      const idx = Math.floor(Math.random() * remaining.length);
+      const sc = remaining[idx];
       if(picks.includes(sc)) continue;
       picks.push(sc);
     }
@@ -692,8 +697,15 @@ async function doRoll(){
         status.textContent = "Team is already full. Restart or save.";
         return;
       }
-      const choices = await roll3(enabledGens, run.team, data);
+      const choices = await roll3(enabledGens, run.team, data, run.seen);
       run.choices = choices;
+      {
+        const seenSet = new Set(Array.isArray(run.seen) ? run.seen : []);
+        for(const c of (choices || [])){
+          if(c && c.speciesConst) seenSet.add(String(c.speciesConst));
+        }
+        run.seen = Array.from(seenSet);
+      }
       setRun(run);
       status.textContent = "Pick one.";
       syncUI();
@@ -767,7 +779,7 @@ async function doRoll(){
     });
 
     restartBtn.addEventListener("click", () => {
-      run = { team: [], choices: [], enabledGens: enabledGens.slice() };
+      run = { team: [], choices: [], seen: [], enabledGens: enabledGens.slice() };
       setRun(run);
       status.textContent = "Restarted.";
       activeSlot = 0;

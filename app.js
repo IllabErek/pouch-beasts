@@ -329,7 +329,9 @@
   }
 
   // Regional-only rolling: exclude non-regional form variants (keep them searchable via manual search).
-  const hasRegional = /_(ALOLA|ALOLAN|GALAR|GALARIAN|HISUI|HISUIAN|PALDEA|PALDEAN)\b/i.test(s);
+  const hasRegional =
+  /_(ALOLA|ALOLAN|GALAR|GALARIAN|HISUI|HISUIAN|PALDEA|PALDEAN)\b/i.test(s) ||
+  /_(A|G|H|P)$/i.test(s);
   if(!hasRegional && s.includes('_') && data){
     const hasKey = (k) => !!((data.baseStats && data.baseStats[k]) || (data.speciesConstToName && data.speciesConstToName[k]));
     let base = s;
